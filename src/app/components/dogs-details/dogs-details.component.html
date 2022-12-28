@@ -1,7 +1,8 @@
 <ng-container *ngIf="details$ | async as item">
   <h2>{{ item.id }}</h2>
   {{item.breed}}<br>
-  <button mat-raised-button color="warn" (click)="delete(item.id)">Remove</button>
+  <button mat-button color="primary" (click)="hideProduct()">Close</button>
+  <button mat-raised-button color="warn" (click)="delete(item.id); hideProduct()">Remove</button>
 </ng-container>
 <ng-container *ngIf="list$ | async as list">
   <table mat-table [dataSource]="list" class="mat-elevation-z8">

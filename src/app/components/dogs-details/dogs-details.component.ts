@@ -12,8 +12,8 @@ import { DogsService } from '../../services/dogs.service';
 })
 export class DogsDetailsComponent {
   readonly list$: Observable<DogsModel[]> = this._dogsService.getAll();
-  private _detailsSubject: Subject<DogsModel> = new Subject<DogsModel>();
-  public details$: Observable<DogsModel> = this._detailsSubject.asObservable();
+  private _detailsSubject: Subject<DogsModel | undefined> = new Subject<DogsModel | undefined>();
+  public details$: Observable<DogsModel | undefined> = this._detailsSubject.asObservable();
 
   constructor(private _dogsService: DogsService) {
   }
@@ -24,5 +24,9 @@ export class DogsDetailsComponent {
 
   delete(id: string): void {
     this._dogsService.delete(id).subscribe();
+  }
+
+  hideProduct(): void {
+    this._detailsSubject.next(undefined);
   }
 }
