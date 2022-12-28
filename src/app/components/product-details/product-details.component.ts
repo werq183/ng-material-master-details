@@ -14,11 +14,12 @@ export class ProductDetailsComponent {
   readonly list$: Observable<ProductModel[]> = this._productService.getAll();
   private _detailsSubject: Subject<ProductModel> = new Subject<ProductModel>();
   public details$: Observable<ProductModel> = this._detailsSubject.asObservable();
-
+  public is_clicked: number = 0;
   constructor(private _productService: ProductService) {
   }
 
   selectProduct(product: ProductModel): void {
     this._detailsSubject.next(product);
+    this.is_clicked=1;
   }
 }
