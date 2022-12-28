@@ -4,8 +4,8 @@
   <button mat-button color="primary" (click)="hideProduct()">Close</button>
   <button mat-raised-button color="warn" (click)="delete(item.id); hideProduct()">Remove</button>
 </ng-container>
-<ng-container *ngIf="list$ | async as list">
-  <table mat-table [dataSource]="list" class="mat-elevation-z8">
+<ng-container *ngIf="list$ | async as refreshedList">
+  <table mat-table [dataSource]="refreshedList" class="mat-elevation-z8">
     <!-- Column 1 -->
     <ng-container matColumnDef="column1">
       <th mat-header-cell *matHeaderCellDef> Id</th>

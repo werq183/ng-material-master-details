@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { DogsModel } from '../../models/dogs.model';
 import { DogsService } from '../../services/dogs.service';
 
@@ -14,6 +15,9 @@ export class DogsDetailsComponent {
   readonly list$: Observable<DogsModel[]> = this._dogsService.getAll();
   private _detailsSubject: Subject<DogsModel | undefined> = new Subject<DogsModel | undefined>();
   public details$: Observable<DogsModel | undefined> = this._detailsSubject.asObservable();
+  private _refreshSubject: BehaviorSubject<void> = new BehaviorSubject<void>(void 0);
+  public refresh$: Observable<void> = this._refreshSubject.asObservable();
+  readonly refreshedList$: Observable<DogsModel[]> = this.refresh$.pipe(switchMap(data => this._dogsService.getAll()));
 
   constructor(private _dogsService: DogsService) {
   }
@@ -23,7 +27,7 @@ export class DogsDetailsComponent {
   }
 
   delete(id: string): void {
-    this._dogsService.delete(id).subscribe();
+    this._dogsService.delete(id).subscribe(() => this._refreshSubject.next());
   }
 
   hideProduct(): void {
