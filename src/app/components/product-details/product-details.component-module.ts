@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductDetailsComponent } from './product-details.component';
-import { AsyncPipe, NgIf } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -11,7 +11,8 @@ import { AsyncPipe, NgIf } from '@angular/common';
     NgIf,
     AsyncPipe,
     MatButtonModule,
-    CommonModule
+    CommonModule,
+    MatGridListModule
   ],
   declarations: [ProductDetailsComponent],
   providers: [],
